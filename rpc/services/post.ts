@@ -36,7 +36,7 @@ const serviceHandler: ModuleRpcServer.ServiceHandlerFor<typeof service> = {
     const resp = await post.save();
     return resp;
   },
-  async listAll(request) {
+  async listAll() {
     const query = mongo.Post.find();
     const posts = await query.exec();
     return posts;

@@ -51,7 +51,7 @@ class Mongo {
 
   async close() {
     try {
-      await mongoose.close();
+      await (mongoose as any).close();
     } catch (e) {
       console.log('Cannot close db:', e);
     }

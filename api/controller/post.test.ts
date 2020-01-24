@@ -11,8 +11,8 @@ describe("GET /post", () => {
           body: "Lorem ipsum style dummy text",
         })
         .set('Accept', 'application/json')
-        .end((err, res) => {
-            expect(err).toBeFalsy()
+        .end((err, res: request.Response) => {
+            expect(err).toBeFalsy();
             expect(res.body).toEqual({
               _id: expect.anything(),
               __v: expect.anything(),
@@ -53,7 +53,7 @@ describe("GET /post", () => {
           body: "Lorem ipsum style dummy text",
         })
         .set('Accept', 'application/json')
-        .end((err, res) => {
+        .end((err, res: request.Response) => {
           expect(err).toBeFalsy();
           ({ id } = res.body);
           done();
@@ -74,7 +74,7 @@ describe("GET /post", () => {
           body: "Lorem ipsum style dummy text",
         })
         .set('Accept', 'application/json')
-        .end((err, res) => {
+        .end((err, res: request.Response) => {
           expect(err).toBeFalsy();
           ({ id } = res.body);
           done();

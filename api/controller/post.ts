@@ -1,6 +1,11 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request as ExpressRequest, Response, NextFunction } from 'express';
 import { ModuleRpcProtocolClient } from "rpc_ts/lib/protocol/client";
+import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 import service from '../services/post';
+
+interface Request extends ExpressRequest {
+  body: any;
+}
 
 const RPC_URI: string = process.env.RPC_URI || 'http://typescript-rpc-api_rpc_1:8500';
 
@@ -10,6 +15,7 @@ async function create(req: Request, res: Response, next: NextFunction) {
       service,
       {
         remoteAddress: RPC_URI,
+        getGrpcWebTransport: NodeHttpTransport(),
       }
     ).create(req.body);
 
@@ -25,6 +31,7 @@ async function list(req: Request, res: Response, next: NextFunction) {
       service,
       {
         remoteAddress: RPC_URI,
+        getGrpcWebTransport: NodeHttpTransport(),
       }
     ).listAll(req.body);
 
@@ -40,6 +47,7 @@ async function remove(req: Request, res: Response, next: NextFunction) {
       service,
       {
         remoteAddress: RPC_URI,
+        getGrpcWebTransport: NodeHttpTransport(),
       }
     ).remove(req.body);
 
@@ -55,6 +63,7 @@ async function update(req: Request, res: Response, next: NextFunction) {
       service,
       {
         remoteAddress: RPC_URI,
+        getGrpcWebTransport: NodeHttpTransport(),
       }
     ).update(req.body);
 
