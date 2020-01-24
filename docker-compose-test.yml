@@ -1,0 +1,44 @@
+version: '3.6'
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: noxart
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: noxart
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    ports:
+      - "27017:27017"
+    logging:
+      driver: none
+  rpc:
+    build:
+      dockerfile: Dockerfile-rpc
+      context: .
+    ports:
+      - "8500:8500"
+    depends_on:
+      - mongo
+    logging:
+      driver: none
+  api:
+    build:
+      dockerfile: Dockerfile-api
+      context: .
+    ports:
+      - "8501:8501"
+    depends_on:
+      - rpc
+    logging:
+      driver: none
+  test:
+    build:
+      dockerfile: Dockerfile-test
+      context: .
+    tty: true
+    depends_on:
+      - rpc
+      - api
+      - mongo

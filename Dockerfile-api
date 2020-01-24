@@ -1,0 +1,4 @@
+FROM noxart
+ADD docker-run-api.sh /root/run-api.sh
+ENTRYPOINT ["/bin/bash", "/root/run-api.sh"]
+EXPOSE 8501

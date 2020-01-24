@@ -1,0 +1,8 @@
+FROM node:latest
+RUN apt-get update ; apt-get install -y netcat
+WORKDIR /usr/noxart/
+COPY package.json .
+RUN npm install
+ADD docker-run-test.sh /root/run-test.sh
+COPY . .
+ENTRYPOINT ["/bin/bash", "/root/run-test.sh"]

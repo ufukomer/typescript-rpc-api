@@ -1,0 +1,5 @@
+FROM noxart
+RUN apt-get update ; apt-get install -y netcat
+ADD docker-run-rpc.sh /root/run-rpc.sh
+ENTRYPOINT ["/bin/bash", "/root/run-rpc.sh"]
+EXPOSE 8500
