@@ -4,7 +4,7 @@ A typescript nodejs boilerplate /w rpc_ts.
 
 ## Start all services
 
-Run command below to start `rpc`, `api`, and `mongo` database services.
+Run command below to start `rpc`, `api`, and `mongo` services.
 
 ```bash
 make up
